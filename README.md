@@ -1,81 +1,262 @@
 # LightDID-ZKP
 
-<p align="center">
-  <img src="assets/diagrams/lightdid_banner.svg" alt="LightDID-ZKP Banner" width="900">
-</p>
+LightDID-ZKP is a policy- and resource-aware research prototype for selecting between BBS selective-disclosure presentations and AnonCreds predicate presentations in privacy-preserving decentralized identity systems.
 
-<p align="center">
-  <b>Policy- and Resource-Aware Selection of BBS and AnonCreds Presentations for Privacy-Preserving Decentralized Identity</b>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.9%2B-blue" alt="Python">
-  <img src="https://img.shields.io/badge/Status-Research%20Prototype-orange" alt="Status">
-  <img src="https://img.shields.io/badge/Domain-Decentralized%20Identity-purple" alt="Domain">
-  <img src="https://img.shields.io/badge/ZKP-BBS%20%7C%20AnonCreds-green" alt="ZKP">
-</p>
+Full form: Lightweight Decentralized Identity Zero-Knowledge Presentation Selector
+Tagline: A policy-aware and resource-aware selector for privacy-preserving verifiable presentations.
 
 ---
 
-## Overview
+## Project Summary
 
-**LightDID-ZKP** is a reproducible research prototype for selecting between **BBS selective-disclosure presentations** and **AnonCreds credential-backed predicate presentations** in privacy-preserving decentralized identity systems.
+LightDID-ZKP addresses a practical problem in decentralized identity systems: a holder wallet may support more than one privacy-preserving presentation mechanism, but the best choice depends on verifier policy, attribute disclosure requirements, predicate proof needs, proof size, latency, verification cost, and available device resources.
 
-The project focuses on a practical question:
+The project introduces **CAPS-ZK**, a lightweight selection layer that chooses between:
 
-> When a holder has multiple privacy-preserving presentation mechanisms available, how should the wallet select the most suitable one under verifier policy, disclosure requirements, predicate needs, and resource constraints?
+* **BBS selective disclosure**, when the verifier requires selected credential attributes to be revealed.
+* **AnonCreds predicate presentation**, when the verifier requires credential-backed predicate proofs.
+* **Policy-safe fallback**, when one mechanism is cheaper but does not satisfy verifier semantics.
 
-LightDID-ZKP introduces a policy-aware selector called **CAPS-ZK** that chooses a presentation strategy based on:
-
-* required verifier policy,
-* attribute disclosure constraints,
-* predicate proof requirements,
-* estimated proof size,
-* estimated proving and verification latency,
-* holder-side resource profile,
-* fallback safety rules.
-
-The repository contains source code, experiment scripts, benchmark summaries, plots, configuration files, and documentation for reproducing the tables and figures used in the LightDID-ZKP manuscript.
+The repository contains source code, policy configurations, benchmark summaries, experiment scripts, result tables, diagrams, tests, and GitHub Wiki documentation.
 
 ---
 
 ## Key Features
 
-* **Policy-aware presentation selection**
+* Policy-aware selection between BBS and AnonCreds presentations.
+* Resource-aware decision logic using latency, proof size, verification cost, and memory indicators.
+* CAPS-ZK selector for wallet-side presentation orchestration.
+* Verifier-policy guard to prevent unsafe cost-only decisions.
+* BBS selective-disclosure profile for attribute-level reveal scenarios.
+* AnonCreds predicate profile for credential-backed predicate scenarios.
+* Synthetic experiment driver for reproducibility and plotting.
+* Benchmark summary CSV files aligned with the manuscript experiment setup.
+* Ablation study showing why cost-first fallback is unsafe.
+* Resource-sensitivity analysis across different holder profiles.
+* Architecture diagrams and result figures for GitHub and manuscript explanation.
+* GitHub Wiki with separate pages for architecture, policy model, experiments, results, and developer notes.
 
-  * Selects between BBS and AnonCreds based on policy and proof requirements.
+---
 
-* **Resource-aware decision logic**
+## System Architecture
 
-  * Uses latency, verification time, VP size, and memory constraints during selection.
+```mermaid
+flowchart LR
+    I[Issuer] --> C[Verifiable Credential]
+    C --> W[Holder Wallet]
 
-* **CAPS-ZK selector**
+    W --> P[Verifier Policy Parser]
+    P --> S[CAPS-ZK Selector]
 
-  * A lightweight orchestration layer for choosing a suitable presentation mechanism without modifying the underlying credential cryptography.
+    S --> BBS[BBS Selective Disclosure]
+    S --> AC[AnonCreds Predicate Presentation]
 
-* **BBS selective-disclosure profile**
+    BBS --> VP[Verifiable Presentation]
+    AC --> VP
 
-  * Models BBS-style presentations for cases where selected attributes need to be revealed.
+    VP --> V[Verifier]
+    V --> R[Policy-Compliant Decision]
+```
 
-* **AnonCreds predicate profile**
+The architecture separates credential issuance, wallet-side presentation selection, cryptographic presentation generation, and verifier-side policy checking. CAPS-ZK does not replace BBS or AnonCreds. It acts as a selection and orchestration layer above them.
 
-  * Models AnonCreds-style presentations for credential-backed predicate proofs.
+---
 
-* **Experiment reproduction**
+## CAPS-ZK Selection Workflow
 
-  * Includes scripts to regenerate result tables, selector outputs, ablation summaries, and figures.
+```mermaid
+flowchart TD
+    A[Presentation Request] --> B[Read Verifier Policy]
+    B --> C{Predicate Proof Required?}
 
-* **Reviewer-safe research scope**
+    C -->|Yes| D[Check AnonCreds Support]
+    C -->|No| E[Check BBS Selective Disclosure]
 
-  * This repository is a research prototype and experiment package. It does not claim to introduce a new cryptographic primitive.
+    D --> F{Policy Semantics Satisfied?}
+    E --> F
+
+    F -->|No| G[Reject Unsafe Mechanism]
+    F -->|Yes| H[Estimate Resource Cost]
+
+    H --> I[Compare Latency, VP Size, Verification Cost, RSS]
+    I --> J[Select Policy-Safe Mechanism]
+    J --> K[Return Decision and Reason]
+```
+
+CAPS-ZK first checks policy correctness and only then compares resource cost. This avoids selecting a low-cost presentation that fails the verifier’s required semantics.
+
+---
+
+## Presentation Profiles
+
+| Profile                          | Main Purpose                                        | Typical Selection Case                                       |
+| -------------------------------- | --------------------------------------------------- | ------------------------------------------------------------ |
+| BBS selective disclosure         | Reveal selected attributes from a signed credential | Attribute disclosure without predicate proof                 |
+| AnonCreds predicate presentation | Prove credential-backed predicates                  | Age, threshold, eligibility, and predicate-style constraints |
+| CAPS-ZK selector                 | Select suitable mechanism                           | Policy-aware and resource-aware holder-side decision         |
+
+---
+
+## Experiment Protocol
+
+The experiment package follows the manuscript-style benchmarking setup:
+
+```text
+Warmup runs:        5
+Measured runs:      50
+Attribute counts:   4, 8, 16, 32, 64
+Mechanisms:         BBS and AnonCreds
+Metrics:            proving latency, verification latency, VP size, RSS memory, CV
+```
+
+The repository includes benchmark summaries, selector decisions, ablation results, resource-sensitivity outputs, and generated figures.
+
+---
+
+## Important Project Paths
+
+| Component             | Path                             |
+| --------------------- | -------------------------------- |
+| Main selector code    | `src/lightdid_zkp/selector.py`   |
+| Policy model          | `src/lightdid_zkp/policy.py`     |
+| Device profiles       | `src/lightdid_zkp/profiles.py`   |
+| Experiment runner     | `experiments/run_all.py`         |
+| Table generation      | `experiments/generate_tables.py` |
+| Plot generation       | `experiments/plot_results.py`    |
+| Policy configs        | `configs/policies.yaml`          |
+| Device configs        | `configs/device_profiles.yaml`   |
+| Benchmark CSV files   | `benchmarks/`                    |
+| Result tables         | `results/tables/`                |
+| Result figures        | `results/figures/`               |
+| Architecture diagrams | `assets/diagrams/`               |
+| Developer notes       | `docs/`                          |
+| Tests                 | `tests/`                         |
+
+---
+
+## Local Run Command
+
+Create and activate a Python environment:
+
+```bash
+python -m venv .venv
+```
+
+Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+macOS/Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the full experiment pipeline:
+
+```bash
+python experiments/run_all.py
+```
+
+Run tests:
+
+```bash
+pytest -q
+```
+
+---
+
+## Reproduce Tables and Figures
+
+Generate manuscript-style tables:
+
+```bash
+python experiments/generate_tables.py
+```
+
+Generate result figures:
+
+```bash
+python experiments/plot_results.py
+```
+
+Outputs are saved in:
+
+```text
+results/tables/
+results/figures/
+```
+
+---
+
+## Example Selector Usage
+
+```python
+from lightdid_zkp.selector import select_presentation
+from lightdid_zkp.policy import VerifierPolicy
+from lightdid_zkp.profiles import DeviceProfile
+
+policy = VerifierPolicy(
+    required_attributes=["name", "degree", "institution"],
+    predicate_requirements=[],
+    max_vp_size_kb=32,
+    require_credential_backed_predicate=False
+)
+
+device = DeviceProfile(
+    name="mobile_like",
+    max_latency_ms=500,
+    max_memory_mb=512
+)
+
+decision = select_presentation(policy=policy, device=device)
+
+print("Selected mechanism:", decision.mechanism)
+print("Reason:", decision.reason)
+```
+
+Example output:
+
+```text
+Selected mechanism: BBS
+Reason: Policy requires selective disclosure only; BBS satisfies disclosure constraints with lower estimated presentation size.
+```
+
+For predicate-heavy policies:
+
+```text
+Selected mechanism: AnonCreds
+Reason: Verifier policy requires credential-backed predicate proof; AnonCreds satisfies predicate semantics.
+```
+
+---
+
+## Architecture Diagrams
+
+The repository includes the following diagrams under `assets/diagrams/`.
+
+| Diagram                 | Link                                                                                                                                              |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| LightDID-ZKP Banner     | [lightdid_banner.svg](https://github.com/dranubhaparashar/LightDID-ZKP/blob/main/assets/diagrams/lightdid_banner.svg)                             |
+| Layered Architecture    | [lightdid_layered_architecture.svg](https://github.com/dranubhaparashar/LightDID-ZKP/blob/main/assets/diagrams/lightdid_layered_architecture.svg) |
+| CAPS-ZK Selection Flow  | [caps_zk_selection_flow.svg](https://github.com/dranubhaparashar/LightDID-ZKP/blob/main/assets/diagrams/caps_zk_selection_flow.svg)               |
+| Experiment Pipeline     | [experiment_pipeline.svg](https://github.com/dranubhaparashar/LightDID-ZKP/blob/main/assets/diagrams/experiment_pipeline.svg)                     |
+| Verifier Metadata Guard | [verifier_metadata_guard.svg](https://github.com/dranubhaparashar/LightDID-ZKP/blob/main/assets/diagrams/verifier_metadata_guard.svg)             |
 
 ---
 
 ## Repository Structure
 
 ```text
-LightDID-ZKP/
-│
+LightDID-ZKP
 ├── assets/
 │   └── diagrams/
 │       ├── lightdid_banner.svg
@@ -131,235 +312,48 @@ LightDID-ZKP/
 
 ---
 
-## System Architecture
+## GitHub Wiki
 
-<p align="center">
-  <img src="assets/diagrams/lightdid_layered_architecture.svg" alt="Layered architecture" width="900">
-</p>
+The project Wiki provides the complete technical documentation for LightDID-ZKP. The README gives the quick project overview, while the Wiki explains the architecture, policy model, CAPS-ZK logic, experiment protocol, results, reproducibility steps, and developer notes in detail.
 
-LightDID-ZKP separates the decentralized identity workflow into four layers:
+Main Wiki: [LightDID-ZKP Wiki](https://github.com/dranubhaparashar/LightDID-ZKP/wiki)
 
-1. **Issuer and credential layer**
+### Wiki Pages
 
-   * Issues verifiable credentials using supported credential formats.
-
-2. **Holder wallet layer**
-
-   * Stores credentials and invokes the CAPS-ZK selector.
-
-3. **Presentation selection layer**
-
-   * Selects between BBS and AnonCreds based on policy and resource constraints.
-
-4. **Verifier policy layer**
-
-   * Defines required attributes, predicate conditions, and metadata restrictions.
-
----
-
-## CAPS-ZK Selection Flow
-
-<p align="center">
-  <img src="assets/diagrams/caps_zk_selection_flow.svg" alt="CAPS-ZK selection flow" width="900">
-</p>
-
-The selector evaluates each request using the following logic:
-
-```text
-Input:
-  - verifier policy
-  - required attributes
-  - predicate requirements
-  - holder device profile
-  - candidate presentation mechanisms
-
-Output:
-  - selected mechanism: BBS or AnonCreds
-  - reason for selection
-  - estimated cost profile
-  - safety/fallback decision
-```
-
-The selector avoids unsafe cost-only choices. For example, if a verifier policy requires a credential-backed predicate, a cheaper selective-disclosure proof is not selected unless it satisfies the policy semantics.
+| Page                                  | Link                                                                                              |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Home                                  | [Open](https://github.com/dranubhaparashar/LightDID-ZKP/wiki)                                     |
+| About LightDID-ZKP                    | [Open](https://github.com/dranubhaparashar/LightDID-ZKP/wiki/About-LightDID-ZKP)                  |
+| Architecture and Design               | [Open](https://github.com/dranubhaparashar/LightDID-ZKP/wiki/Architecture-and-Design)             |
+| CAPS-ZK Selection Logic               | [Open](https://github.com/dranubhaparashar/LightDID-ZKP/wiki/CAPS-ZK-Selection-Logic)             |
+| Policy Model                          | [Open](https://github.com/dranubhaparashar/LightDID-ZKP/wiki/Policy-Model)                        |
+| Experiment Protocol                   | [Open](https://github.com/dranubhaparashar/LightDID-ZKP/wiki/Experiment-Protocol)                 |
+| Results and Figures                   | [Open](https://github.com/dranubhaparashar/LightDID-ZKP/wiki/Results-and-Figures)                 |
+| Reproducing the Paper Tables          | [Open](https://github.com/dranubhaparashar/LightDID-ZKP/wiki/Reproducing-the-Paper-Tables)        |
+| Optional Real-Backend Benchmarks      | [Open](https://github.com/dranubhaparashar/LightDID-ZKP/wiki/Optional-Real-Backend-Benchmarks)    |
+| Repository Structure                  | [Open](https://github.com/dranubhaparashar/LightDID-ZKP/wiki/Repository-Structure)                |
+| Security, Privacy, and Claim Boundary | [Open](https://github.com/dranubhaparashar/LightDID-ZKP/wiki/Security-Privacy-and-Claim-Boundary) |
+| Developer Guide                       | [Open](https://github.com/dranubhaparashar/LightDID-ZKP/wiki/Developer-Guide)                     |
+| Quick Links                           | [Open](https://github.com/dranubhaparashar/LightDID-ZKP/wiki/Quick-Links)                         |
+| GitHub Wiki Upload Instructions       | [Open](https://github.com/dranubhaparashar/LightDID-ZKP/wiki/GitHub-Wiki-Upload-Instructions)     |
 
 ---
 
-## Supported Presentation Profiles
-
-| Profile                              | Main Use Case                                       | Strength                                             |
-| ------------------------------------ | --------------------------------------------------- | ---------------------------------------------------- |
-| **BBS selective disclosure**         | Reveal selected attributes from a signed credential | Compact disclosure for attribute-based presentations |
-| **AnonCreds predicate presentation** | Prove predicates over credential attributes         | Strong fit for credential-backed predicate proofs    |
-| **CAPS-ZK selector**                 | Choose between available mechanisms                 | Policy-aware and resource-aware orchestration        |
-
----
-
-## Experiment Pipeline
-
-<p align="center">
-  <img src="assets/diagrams/experiment_pipeline.svg" alt="Experiment pipeline" width="900">
-</p>
-
-The experiment package includes:
-
-* benchmark summary tables,
-* selector decision outputs,
-* ablation study outputs,
-* resource-sensitivity outputs,
-* generated figures,
-* optional real-backend benchmark templates.
-
-The measured experiment configuration follows:
-
-```text
-Warmup runs:      5
-Measured runs:    50
-Attribute counts: 4, 8, 16, 32, 64
-Mechanisms:       BBS, AnonCreds
-Metrics:          proving latency, verification latency, VP size, RSS memory, CV
-```
-
----
-
-## Quick Start
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/dranubhaparashar/LightDID-ZKP.git
-cd LightDID-ZKP
-```
-
-### 2. Create a virtual environment
-
-```bash
-python -m venv .venv
-```
-
-Activate it:
-
-```bash
-# Windows
-.venv\Scripts\activate
-
-# macOS/Linux
-source .venv/bin/activate
-```
-
-### 3. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Run all experiments
-
-```bash
-python experiments/run_all.py
-```
-
-### 5. Run tests
-
-```bash
-pytest -q
-```
-
----
-
-## Reproducing Tables and Figures
-
-To regenerate tables:
-
-```bash
-python experiments/generate_tables.py
-```
-
-To regenerate figures:
-
-```bash
-python experiments/plot_results.py
-```
-
-Generated outputs are written to:
-
-```text
-results/tables/
-results/figures/
-```
-
----
-
-## Example Selector Usage
-
-```python
-from lightdid_zkp.selector import select_presentation
-from lightdid_zkp.policy import VerifierPolicy
-from lightdid_zkp.profiles import DeviceProfile
-
-policy = VerifierPolicy(
-    required_attributes=["name", "degree", "institution"],
-    predicate_requirements=[],
-    max_vp_size_kb=32,
-    require_credential_backed_predicate=False
-)
-
-device = DeviceProfile(
-    name="mobile_like",
-    max_latency_ms=500,
-    max_memory_mb=512
-)
-
-decision = select_presentation(policy=policy, device=device)
-
-print(decision.mechanism)
-print(decision.reason)
-```
-
----
-
-## Example Output
-
-```text
-Selected mechanism: BBS
-Reason: Policy requires selective disclosure only; BBS satisfies disclosure constraints with lower estimated presentation size.
-```
-
-For predicate-heavy policies, the selector can choose AnonCreds:
-
-```text
-Selected mechanism: AnonCreds
-Reason: Verifier policy requires credential-backed predicate proof; AnonCreds satisfies predicate semantics.
-```
-
----
-
-## Verifier Metadata Guard
-
-<p align="center">
-  <img src="assets/diagrams/verifier_metadata_guard.svg" alt="Verifier metadata guard" width="900">
-</p>
-
-LightDID-ZKP also models verifier-side metadata restrictions so that a low-cost proof is not selected when it violates the verifier’s required proof semantics.
-
-This is important because a wallet selector must not optimize only for speed or size. It must first satisfy the verifier policy.
-
----
-
-## Results Included
+## Result Files
 
 The repository includes result files for:
 
-* BBS presentation latency,
-* AnonCreds presentation latency,
-* verification time,
-* VP size,
-* RSS memory usage,
-* coefficient of variation,
-* selector decisions across policy types,
-* ablation comparison against unsafe cost-first fallback,
-* resource-sensitivity analysis.
+* BBS presentation latency.
+* AnonCreds presentation latency.
+* Verification time.
+* Verifiable presentation size.
+* RSS memory usage.
+* Coefficient of variation.
+* Selector decisions across policy types.
+* Ablation comparison against unsafe cost-first fallback.
+* Resource-sensitivity analysis.
 
-Result files are available in:
+Result folders:
 
 ```text
 benchmarks/
@@ -369,38 +363,40 @@ results/figures/
 
 ---
 
-## Research Scope and Claim Boundary
-
-This project is intentionally scoped as a **policy-aware and resource-aware selection framework**.
-
-It does **not** claim:
-
-* to introduce a new zero-knowledge proof primitive,
-* to replace BBS or AnonCreds,
-* to provide production wallet security certification,
-* to validate constrained-device deployment unless real device measurements are added,
-* to provide a full DID wallet implementation.
-
-It does claim:
-
-* to provide a reproducible selection framework,
-* to compare presentation-level trade-offs,
-* to model policy/resource constraints,
-* to provide a clean prototype for future wallet-side integration.
-
----
-
 ## Optional Real-Backend Benchmarks
 
-The repository includes optional templates for integrating real cryptographic backends.
+The main repository provides a reproducible experiment package using benchmark summaries and selector simulations.
 
-These templates are placed under:
+Optional templates for real BBS and AnonCreds backend benchmarking are placed under:
 
 ```text
 experiments/optional_real_backend_templates/
 ```
 
-They are intentionally separated from the main reproducibility path because library versions, cryptographic bindings, and runtime support may differ across systems.
+These templates are separated from the main reproducibility path because cryptographic libraries, bindings, operating systems, and runtime support may differ across systems.
+
+---
+
+## Research Scope and Claim Boundary
+
+LightDID-ZKP is intended as a research prototype for privacy-preserving decentralized identity presentation selection.
+
+It does not claim to:
+
+* introduce a new zero-knowledge proof primitive,
+* replace BBS or AnonCreds,
+* provide production wallet security certification,
+* prove constrained-device deployment without real device measurements,
+* implement a full DID wallet,
+* provide legal or compliance certification for digital identity deployments.
+
+It does claim to:
+
+* provide a policy-aware selection framework,
+* provide a resource-aware presentation decision layer,
+* compare presentation-level trade-offs,
+* support reproducibility through scripts, tables, and figures,
+* demonstrate why policy semantics must be checked before cost optimization.
 
 ---
 
@@ -438,17 +434,10 @@ If you use this repository, please cite the associated LightDID-ZKP manuscript:
 
 ## Maintainer
 
-**Dr. Anubha Parashar**
-GitHub: [@dranubhaparashar](https://github.com/dranubhaparashar)
+Maintained by **Dr. Anubha Parashar** / [@dranubhaparashar](https://github.com/dranubhaparashar).
 
 ---
 
-## License
+## About
 
-This repository is released for academic and research use. See the `LICENSE` file for details.
-
----
-
-## Acknowledgement
-
-LightDID-ZKP builds on the broader decentralized identity ecosystem, including verifiable credentials, selective disclosure, BBS signatures, and AnonCreds-style predicate presentations. The repository is intended to support reproducibility, experimentation, and future research on privacy-preserving wallet-side presentation selection.
+LightDID-ZKP is a policy- and resource-aware research prototype for selecting BBS or AnonCreds verifiable presentations in privacy-preserving decentralized identity systems. It provides source code, benchmark summaries, experiment scripts, diagrams, result files, and Wiki documentation for reproducible research.
