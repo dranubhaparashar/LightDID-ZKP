@@ -1,0 +1,6 @@
+attributes,runs,prove_or_present_ms_mean,prove_or_present_ms_std,verify_ms_mean,verify_ms_std,proof_bytes,vp_bytes,peak_rss_mb,cv_present_pct,cv_verify_pct,policy_class,operation
+4,50,74.88,5.68,51.58,2.88,447,477,144.37,7.59,5.58,P2,unlinkable_selective_disclosure
+8,50,94.64,4.93,57.95,4.93,576,606,144.38,5.21,8.50,P2,unlinkable_selective_disclosure
+16,50,141.16,11.86,68.47,4.37,833,863,144.39,8.40,6.39,P2,unlinkable_selective_disclosure
+32,50,215.92,7.44,88.84,6.15,1347,1377,151.16,3.44,6.92,P2,unlinkable_selective_disclosure
+64,50,377.45,19.71,125.36,7.11,2375,2405,143.00,5.22,5.67,P2,unlinkable_selective_disclosure

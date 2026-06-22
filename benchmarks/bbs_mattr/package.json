@@ -1,0 +1,12 @@
+{
+  "name": "lightdid-zkp-bbs-benchmark",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@mattrglobal/bbs-signatures": "^2.0.0"
+  },
+  "scripts": {
+    "bench": "node bench_bbs_mattr.js"
+  }
+}

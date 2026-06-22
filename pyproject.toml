@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lightdid-zkp"
+version = "0.1.0"
+description = "Policy- and resource-aware selector for BBS and AnonCreds presentations"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  {name="Anubha Parashar"},
+  {name="Apoorva Parashar", email="apoorvaparashar0000@gmail.com"},
+  {name="Kavita Jhajharia"}
+]
+dependencies = ["numpy>=1.26", "pandas>=2.0", "matplotlib>=3.8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

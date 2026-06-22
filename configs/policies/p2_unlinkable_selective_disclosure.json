@@ -1,0 +1,28 @@
+{
+  "policy_id": "P2",
+  "name": "High-unlinkability selective disclosure",
+  "semantics": "unlinkable_selective_disclosure",
+  "revealed_attributes": [
+    "role",
+    "membership"
+  ],
+  "hidden_attributes": [
+    "employee_id",
+    "date_of_birth",
+    "address"
+  ],
+  "predicates": [],
+  "unlinkability_required": true,
+  "min_privacy_level": 2,
+  "status_required": false,
+  "nonce": "nonce-p2-demo",
+  "domain": "verifier.example",
+  "resource_budget": {
+    "attributes": 16,
+    "max_prove_ms": 500,
+    "max_verify_ms": 300,
+    "max_vp_bytes": 50000,
+    "max_rss_mb": 400
+  },
+  "notes": "BBS is the evaluated backend for P2 unlinkable selective disclosure."
+}

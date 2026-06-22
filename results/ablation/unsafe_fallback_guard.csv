@@ -1,0 +1,6 @@
+policy_id,policy_name,safe_caps_zk,unsafe_cost_first,unsafe_semantic_violation,explanation
+P1,Simple selective disclosure,BBS,BBS,False,no predicate downgrade in this row
+P2,High-unlinkability selective disclosure,BBS,BBS,False,no predicate downgrade in this row
+P3,Credential-backed age predicate,AnonCreds,BBS,True,cost-first selects BBS for a predicate policy
+P4,Predicate plus hidden attributes,AnonCreds,BBS,True,cost-first selects BBS for a predicate policy
+P5,Unsupported or resource-exceeding request,REJECT,BBS,True,cost-first selects BBS for a predicate policy

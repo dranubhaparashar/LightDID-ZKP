@@ -1,0 +1,12 @@
+{
+  "name": "container_baseline",
+  "max_prove_ms": 500,
+  "max_verify_ms": 300,
+  "max_vp_bytes": 50000,
+  "max_rss_mb": 400,
+  "weights": {
+    "latency": 0.45,
+    "size": 0.35,
+    "memory": 0.2
+  }
+}

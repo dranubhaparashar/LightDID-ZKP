@@ -1,0 +1,12 @@
+{
+  "name": "tight_memory_profile_not_physical_measurement",
+  "max_prove_ms": 250,
+  "max_verify_ms": 160,
+  "max_vp_bytes": 20000,
+  "max_rss_mb": 180,
+  "weights": {
+    "latency": 0.4,
+    "size": 0.3,
+    "memory": 0.3
+  }
+}

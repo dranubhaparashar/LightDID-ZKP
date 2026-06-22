@@ -1,0 +1,28 @@
+{
+  "policy_id": "P1",
+  "name": "Simple selective disclosure",
+  "semantics": "selective_disclosure",
+  "revealed_attributes": [
+    "name",
+    "membership"
+  ],
+  "hidden_attributes": [
+    "date_of_birth",
+    "address",
+    "credential_id"
+  ],
+  "predicates": [],
+  "unlinkability_required": false,
+  "min_privacy_level": 1,
+  "status_required": false,
+  "nonce": "nonce-p1-demo",
+  "domain": "verifier.example",
+  "resource_budget": {
+    "attributes": 8,
+    "max_prove_ms": 500,
+    "max_verify_ms": 300,
+    "max_vp_bytes": 50000,
+    "max_rss_mb": 400
+  },
+  "notes": "Disclosure semantics are sufficient; BBS is selected under measured cost."
+}

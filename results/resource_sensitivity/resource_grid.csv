@@ -1,0 +1,81 @@
+device,rss_budget_mb,vp_budget_bytes,policy_id,accepted,selected_backend,reason
+grid_rss160_vp1000,160,1000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss160_vp1000,160,1000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss160_vp1000,160,1000,P3,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss160_vp1000,160,1000,P4,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss160_vp1000,160,1000,P5,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss160_vp5000,160,5000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss160_vp5000,160,5000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss160_vp5000,160,5000,P3,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss160_vp5000,160,5000,P4,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss160_vp5000,160,5000,P5,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss160_vp20000,160,20000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss160_vp20000,160,20000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss160_vp20000,160,20000,P3,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss160_vp20000,160,20000,P4,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss160_vp20000,160,20000,P5,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss160_vp50000,160,50000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss160_vp50000,160,50000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss160_vp50000,160,50000,P3,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss160_vp50000,160,50000,P4,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss160_vp50000,160,50000,P5,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss220_vp1000,220,1000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss220_vp1000,220,1000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss220_vp1000,220,1000,P3,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss220_vp1000,220,1000,P4,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss220_vp1000,220,1000,P5,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss220_vp5000,220,5000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss220_vp5000,220,5000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss220_vp5000,220,5000,P3,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss220_vp5000,220,5000,P4,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss220_vp5000,220,5000,P5,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss220_vp20000,220,20000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss220_vp20000,220,20000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss220_vp20000,220,20000,P3,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss220_vp20000,220,20000,P4,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss220_vp20000,220,20000,P5,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss220_vp50000,220,50000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss220_vp50000,220,50000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss220_vp50000,220,50000,P3,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss220_vp50000,220,50000,P4,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss220_vp50000,220,50000,P5,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss300_vp1000,300,1000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss300_vp1000,300,1000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss300_vp1000,300,1000,P3,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss300_vp1000,300,1000,P4,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss300_vp1000,300,1000,P5,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss300_vp5000,300,5000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss300_vp5000,300,5000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss300_vp5000,300,5000,P3,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss300_vp5000,300,5000,P4,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss300_vp5000,300,5000,P5,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss300_vp20000,300,20000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss300_vp20000,300,20000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss300_vp20000,300,20000,P3,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss300_vp20000,300,20000,P4,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss300_vp20000,300,20000,P5,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss300_vp50000,300,50000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss300_vp50000,300,50000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss300_vp50000,300,50000,P3,True,AnonCreds,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss300_vp50000,300,50000,P4,True,AnonCreds,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss300_vp50000,300,50000,P5,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss400_vp1000,400,1000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss400_vp1000,400,1000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss400_vp1000,400,1000,P3,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss400_vp1000,400,1000,P4,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss400_vp1000,400,1000,P5,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss400_vp5000,400,5000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss400_vp5000,400,5000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss400_vp5000,400,5000,P3,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss400_vp5000,400,5000,P4,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss400_vp5000,400,5000,P5,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss400_vp20000,400,20000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss400_vp20000,400,20000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss400_vp20000,400,20000,P3,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss400_vp20000,400,20000,P4,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss400_vp20000,400,20000,P5,False,REJECT,no semantically safe and resource-feasible backend
+grid_rss400_vp50000,400,50000,P1,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss400_vp50000,400,50000,P2,True,BBS,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss400_vp50000,400,50000,P3,True,AnonCreds,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss400_vp50000,400,50000,P4,True,AnonCreds,"selected after semantic, privacy, status, issuer-binding, freshness, and resource filters"
+grid_rss400_vp50000,400,50000,P5,False,REJECT,no semantically safe and resource-feasible backend

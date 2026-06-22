@@ -1,0 +1,12 @@
+{
+  "name": "mobile_like_profile_not_measured_device_claim",
+  "max_prove_ms": 300,
+  "max_verify_ms": 200,
+  "max_vp_bytes": 25000,
+  "max_rss_mb": 300,
+  "weights": {
+    "latency": 0.55,
+    "size": 0.3,
+    "memory": 0.15
+  }
+}

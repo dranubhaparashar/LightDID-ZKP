@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: "LightDID-ZKP: Policy- and Resource-Aware Selection of BBS and AnonCreds Presentations for Privacy-Preserving Decentralized Identity"
+message: "If you use this repository, please cite the LightDID-ZKP manuscript."
+type: software
+authors:
+  - family-names: Parashar
+    given-names: Anubha
+  - family-names: Parashar
+    given-names: Apoorva
+    email: apoorvaparashar0000@gmail.com
+  - family-names: Jhajharia
+    given-names: Kavita
+version: 0.1.0
+date-released: 2026-06-22
+license: MIT
+repository-code: "https://github.com/<your-user>/LightDID-ZKP"

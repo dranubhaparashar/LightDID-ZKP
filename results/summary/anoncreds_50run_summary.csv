@@ -1,0 +1,6 @@
+attributes,runs,prove_or_present_ms_mean,prove_or_present_ms_std,verify_ms_mean,verify_ms_std,proof_bytes,vp_bytes,peak_rss_mb,cv_present_pct,cv_verify_pct,policy_class,operation
+4,50,89.19,3.89,85.68,3.16,18037.0,18037.0,285.35,4.36,3.69,P4,credential_backed_predicate
+8,50,98.41,7.17,94.09,4.77,18803.5,18803.5,286.50,7.29,5.07,P4,credential_backed_predicate
+16,50,111.50,7.42,108.05,7.99,20340.5,20340.5,290.96,6.65,7.39,P4,credential_backed_predicate
+32,50,137.31,10.44,131.95,6.20,23419.5,23419.5,301.13,7.60,4.70,P4,credential_backed_predicate
+64,50,190.44,6.70,186.45,8.24,29573.0,29573.0,286.62,3.52,4.42,P4,credential_backed_predicate

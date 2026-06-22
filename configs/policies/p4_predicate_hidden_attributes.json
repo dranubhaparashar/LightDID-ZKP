@@ -1,0 +1,36 @@
+{
+  "policy_id": "P4",
+  "name": "Predicate plus hidden attributes",
+  "semantics": "predicate_hidden_attributes",
+  "revealed_attributes": [
+    "membership"
+  ],
+  "hidden_attributes": [
+    "age",
+    "date_of_birth",
+    "address",
+    "credential_id"
+  ],
+  "predicates": [
+    {
+      "claim": "age",
+      "op": ">=",
+      "value": 18,
+      "credential_backed": true,
+      "issuer_certified_as_signed_claim": false
+    }
+  ],
+  "unlinkability_required": true,
+  "min_privacy_level": 3,
+  "status_required": false,
+  "nonce": "nonce-p4-demo",
+  "domain": "verifier.example",
+  "resource_budget": {
+    "attributes": 16,
+    "max_prove_ms": 500,
+    "max_verify_ms": 300,
+    "max_vp_bytes": 50000,
+    "max_rss_mb": 400
+  },
+  "notes": "AnonCreds is the evaluated backend for P4 credential-backed hidden predicate presentation."
+}
