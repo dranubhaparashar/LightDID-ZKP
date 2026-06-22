@@ -1,0 +1,5 @@
+Device,Backend,Attributes,Prove_or_Present_slowdown_x,Verify_slowdown_x
+Raspberry Pi,BBS,64,2.18,2.57
+Raspberry Pi,AnonCreds,64,2.45,2.8
+Android,BBS,64,2.49,2.98
+Android,AnonCreds,64,3.27,3.65

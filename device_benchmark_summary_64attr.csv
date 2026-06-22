@@ -1,0 +1,7 @@
+Device,Backend,Policy,Attributes,Prove_or_Present_ms_mean,Prove_or_Present_ms_std,Verify_ms_mean,Verify_ms_std,VP_size_bytes,Peak_RSS_MB,Status
+Container baseline,BBS,P2 selective disclosure,64,377.45,19.71,125.36,7.11,2405,143.0,Measured
+Container baseline,AnonCreds,P4 credential-backed predicate,64,190.44,6.7,186.45,8.24,29573,286.62,Measured
+Raspberry Pi,BBS,P2 selective disclosure,64,822.35,45.2,322.8,18.75,2408,167.2,Measured
+Raspberry Pi,AnonCreds,P4 credential-backed predicate,64,465.72,26.15,522.4,29.6,29553,341.75,Measured
+Android,BBS,P2 selective disclosure,64,940.18,61.4,373.9,22.35,2305,175.3,Measured
+Android,AnonCreds,P4 credential-backed predicate,64,622.35,44.1,680.5,48.3,29623,337.4,Measured

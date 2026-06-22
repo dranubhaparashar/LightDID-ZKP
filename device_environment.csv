@@ -1,0 +1,4 @@
+Environment,Device,RAM,OS,Runtime,Library_setting
+Container baseline,Linux container,Host allocated,Linux,Python / backend runtime,Same benchmark harness
+Raspberry Pi,Raspberry Pi 4,4 GB,"Raspberry Pi OS / Raspbian, test-time build",Python,Same libraries and versions
+Android,Samsung Galaxy S25,8 GB,"Android OS, test-time build",Python,Same libraries and versions
