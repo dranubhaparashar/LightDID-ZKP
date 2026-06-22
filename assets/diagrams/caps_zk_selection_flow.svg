@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="520" viewBox="0 0 1180 520">
+
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L9,3 z" fill="#333" />
+  </marker>
+</defs>
+<style>
+  .bg { fill: #ffffff; }
+  .lane { fill: #f7f9fc; stroke: #d7dde8; stroke-width: 1.2; }
+  .box { fill: #ffffff; stroke: #2d3748; stroke-width: 1.3; }
+  .holder { fill: #f5fbff; stroke: #245d85; }
+  .decision { fill: #fffaf0; stroke: #9a6b16; }
+  .backend { fill: #f7fff7; stroke: #276749; }
+  .external { fill: #fbf5ff; stroke: #6b46c1; }
+  .title { font: 700 14px Arial, sans-serif; fill: #1a202c; }
+  .sub { font: 12px Arial, sans-serif; fill: #4a5568; }
+  .laneText { font: 700 15px Arial, sans-serif; fill: #2d3748; }
+  .arrow { stroke: #333; stroke-width: 1.4; fill: none; }
+  .dashed { stroke-dasharray: 6 4; }
+  .label { font: 11px Arial, sans-serif; fill: #2d3748; }
+</style>
+
+<rect class="bg" width="1180" height="520" />
+<text x="590" y="35" text-anchor="middle" style="font:700 23px Arial; fill:#1a202c;">CAPS-ZK Selection Flow</text>
+<rect x="60" y="95" width="150" height="72" rx="12" class="box external" /><text x="135.0" y="120" text-anchor="middle" class="title">Verifier policy</text><text x="135.0" y="143" text-anchor="middle" class="sub">attributes, predicates
+unlinkability, status</text>
+<rect x="260" y="95" width="150" height="72" rx="12" class="box holder" /><text x="335.0" y="120" text-anchor="middle" class="title">Policy parser</text><text x="335.0" y="143" text-anchor="middle" class="sub">normalize P
+compute policy hash</text>
+<rect x="460" y="95" width="150" height="72" rx="12" class="box holder" /><text x="535.0" y="120" text-anchor="middle" class="title">Credential metadata</text><text x="535.0" y="143" text-anchor="middle" class="sub">available backends
+issuer material</text>
+<rect x="660" y="95" width="150" height="72" rx="12" class="box holder" /><text x="735.0" y="120" text-anchor="middle" class="title">Backend registry</text><text x="735.0" y="143" text-anchor="middle" class="sub">capability vector
+BBS / AnonCreds</text>
+<rect x="860" y="95" width="150" height="72" rx="12" class="box holder" /><text x="935.0" y="120" text-anchor="middle" class="title">Resource profile</text><text x="935.0" y="143" text-anchor="middle" class="sub">device and policy
+budgets</text>
+<rect x="520" y="235" width="160" height="76" rx="12" class="box decision" /><text x="600.0" y="260" text-anchor="middle" class="title">Candidate filters</text><text x="600.0" y="283" text-anchor="middle" class="sub">semantic → privacy
+predicate → status
+resource feasibility</text>
+<rect x="250" y="355" width="180" height="76" rx="12" class="box decision" /><text x="340.0" y="380" text-anchor="middle" class="title">Reject</text><text x="340.0" y="403" text-anchor="middle" class="sub">unsafe, insufficient,
+or infeasible backend</text>
+<rect x="750" y="355" width="180" height="76" rx="12" class="box decision" /><text x="840.0" y="380" text-anchor="middle" class="title">Cost scoring</text><text x="840.0" y="403" text-anchor="middle" class="sub">latency + size + RSS
+normalized score</text>
+<rect x="980" y="355" width="145" height="76" rx="12" class="box backend" /><text x="1052.5" y="380" text-anchor="middle" class="title">VP composer</text><text x="1052.5" y="403" text-anchor="middle" class="sub">selected backend
+metadata guard</text>
+<line x1="210" y1="131" x2="260" y2="131" class="arrow" marker-end="url(#arrow)" />
+<line x1="410" y1="131" x2="460" y2="131" class="arrow" marker-end="url(#arrow)" />
+<line x1="610" y1="131" x2="660" y2="131" class="arrow" marker-end="url(#arrow)" />
+<line x1="810" y1="131" x2="860" y2="131" class="arrow" marker-end="url(#arrow)" />
+<line x1="935" y1="167" x2="610" y2="235" class="arrow" marker-end="url(#arrow)" />
+<line x1="735" y1="167" x2="610" y2="235" class="arrow" marker-end="url(#arrow)" />
+<line x1="535" y1="167" x2="610" y2="235" class="arrow" marker-end="url(#arrow)" />
+<line x1="610" y1="311" x2="340" y2="355" class="arrow" marker-end="url(#arrow)" /><text x="475.0" y="326.0" text-anchor="middle" class="label">fail closed</text>
+<line x1="680" y1="273" x2="840" y2="355" class="arrow" marker-end="url(#arrow)" /><text x="760.0" y="307.0" text-anchor="middle" class="label">feasible candidates</text>
+<line x1="930" y1="393" x2="980" y2="393" class="arrow" marker-end="url(#arrow)" /><text x="955.0" y="386.0" text-anchor="middle" class="label">minimum score</text>
+<text x="590" y="480" text-anchor="middle" style="font:13px Arial; fill:#4a5568;">Cost is applied only after semantic and privacy safety filters; it never overrides predicate or issuer-binding requirements.</text>
+</svg>
